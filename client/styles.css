@@ -1,0 +1,70 @@
+/* Basic CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* white background */
+}
+
+/* Navigation Bar Styles */
+nav {
+  background-color: #b2d8d8; /* light teal */
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  color: #ffffff;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 0.5em;
+}
+
+/* Main Content Styles */
+main {
+  padding: 1em;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #b2d8d8; /* light teal */
+  text-align: center;
+  padding: 1em;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #ffffff;
+}
+
+/* Enhanced Styles */
+
+/* Add a hover effect for links to show they're interactive */
+nav a:hover,
+#header-logo:hover {
+    color: #003333; /* Darker shade of teal */
+    cursor: pointer;
+}
+
+/* Increase spacing between navigation links for better touch target size and visual separation */
+nav a:not(:last-child) {
+    margin-right: 1em;
+}
+
+/* Change the color when link is actively being clicked */
+nav a:active,
+#header-logo:active {
+    color: #004d4d; /* Even darker shade of teal for an active/click effect */
+}
+
+/* Style the h1 logo in the header for better visual indication and separation */
+#header-logo {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer; /* Shows hand icon indicating it's clickable */
+}
