@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadySetGo - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="activity-grid">
+        <!-- Sample activity cards. You can add more with the same structure. -->
+        <div class="activity-card" data-activity="camping" onclick="handleActivityClick('camping')">
+            <img src="https://epiclaketahoe.com/wp-content/uploads/2019/09/scott-goodwill-y8Ngwq34_Ak-unsplash-696x464.jpg" alt="Camping">
+            <div class="activity-label">
+                <h3>Camping</h3>
+            </div>
+        </div>
+
+        <div class="activity-card" data-activity="surfing" onclick="handleActivityClick('surfing')">
+            <img src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Cheight=650%2Cq=40%2Csharpen=1%2Cwidth=956/wp-content/uploads/surf-day.jpg" alt="Surfing">
+            <div class="activity-label">
+                <h3>Surfing</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="vacation" onclick="handleActivityClick('vacation')">
+            <img src=https://ciaobambino.com/wp-content/uploads/2015/02/caribbean-vacation-budget-tips.jpg alt="Vacation">
+            <div class="activity-label">
+                <h3>Vacation</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="hiking" onclick="handleActivityClick('hiking')">
+            <img src=https://www.nps.gov/grte/planyourvisit/images/Hiking-NPS-Photo-J-Tobiason_3.jpg?maxwidth=1300&maxheight=1300&autorotate=false alt="Hiking">
+            <div class="activity-label">
+                <h3>Hiking</h3>
+            </div>
+        </div>
+    
+    
+        <div class="activity-card" data-activity="painting" onclick="handleActivityClick('painting')">
+            <img src=https://soworkshop.com/wp-content/uploads/2021/09/paint-and-sip-tips.jpg alt="Painting">
+            <div class="activity-label">
+                <h3>Painting</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="workout" onclick="handleActivityClick('workout')">
+            <img src=https://www.si.com/.image/t_share/MTk0NDYwOTQ0Nzc0OTk3NTA5/workout-apps-for-men_hero.png alt="Workout">
+            <div class="activity-label">
+                <h3>Workout</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="concert" onclick="handleActivityClick('concert')">
+            <img src=https://media.timeout.com/images/106016024/750/422/image.jpg alt="Concert">
+            <div class="activity-label">
+                <h3>Concert</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="roadtrip" onclick="handleActivityClick('roadtrip')">
+            <img src=https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cm9hZCUyMHRyaXB8ZW58MHx8MHx8fDA%3D&w=1000&q=80 alt="Roadtrip">
+            <div class="activity-label">
+                <h3>Roadtrip</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="beach" onclick="handleActivityClick('beach')">
+            <img src=https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/34/dd/60/caption.jpg?w=1200&h=-1&s=1&cx=1920&cy=1080&chk=v1_7d12105273199cc06428 alt="Beach">
+            <div class="activity-label">
+                <h3>Beach</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="fishing" onclick="handleActivityClick('fishing')">
+            <img src=https://www.nps.gov/subjects/fishing/images/Mississippi-recreational-area-fishing-canoe-NPS.jpg?maxwidth=650&autorotate=false alt="Fishing">
+            <div class="activity-label">
+                <h3>Fishing</h3>
+            </div>
+        </div>
+    
+        <div class="activity-card" data-activity="picnic" onclick="handleActivityClick('picnic')">
+            <img src=https://consettmagazine.com/wp-content/uploads/2014/04/picnic1.jpg alt="Picnic">
+            <div class="activity-label">
+                <h3>Picnic</h3>
+            </div>
+        </div>
+        
+        <!-- Add more activity cards here -->
+    
+        <div class="activity-card" data-activity="custom" onclick="handleActivityClick('custom')">
+            <img src="https://sunshineandravioli.net/cdn/shop/products/il_fullxfull.2304308055_rc63_2048x.jpg?v=1650203315" alt="Custom">
+            <div class="activity-label">
+                <h3>Custom List</h3>
+            </div>
+        </div>
+    </div>
+    
+
+<div class="customization-section" hidden>
+    <h2><span class="list-title-display">List Title</span></h2>
+    <input type="text" class="list-title-input" placeholder="Enter list title..." hidden>
+
+    <div class="dropdown-section">
+        <button class="dropdown-btn">Select Items</button>
+        <div class="custom-dropdown" style="display: none;">
+            <!-- Items with checkboxes will be dynamically populated here -->
+        </div>
+        <button class="add-selected-items-btn">Add Selected Items</button>
+    </div>
+
+    <input type="text" class="custom-item-input" placeholder="Add custom item...">
+    <button class="add-custom-item-btn">Add Custom Item</button>
+
+    <div class="stylish-list">
+        <ul class="item-list">
+            <!-- Customized list will be dynamically populated here -->
+        </ul>
+    </div>
+
+    <button class="save-list-btn">Save List</button>
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>

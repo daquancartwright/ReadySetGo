@@ -1,27 +1,25 @@
-// Import the Sequelize constructor, DataTypes object, and the Model class
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const bcrypt = require('bcrypt');
+// We import Sequelize and our sequelize instance.
+const { DataTypes, Model } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const sequelize = require('../db');  // Importing sequelize from db.js
 
-// Import the config for the current environment
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config.json')[env];
-
-// Create a new Sequelize instance
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
-
-// Define the User model with its attributes and their types
+// We define our User model.
 class User extends Model {
+    // Encrypt password
     static async hashPassword(password) {
         return await bcrypt.hash(password, 10);
     }
 
+    // Method to validate a plain text password against the user's hashed password.
     validPassword(password) {
         return bcrypt.compareSync(password, this.password);
     }
 }
 
+// We initialize our User model with its properties and methods.
 User.init({
-    // Unique username, cannot be null
+
+    // Username: STRING
     username: {
         type: DataTypes.STRING,
         unique: true,
@@ -35,7 +33,8 @@ User.init({
             }
         }
     },
-    // Email
+
+    // Email: String
     email: {
         type: DataTypes.STRING,
         unique: true,
@@ -49,7 +48,8 @@ User.init({
             }
         }
     },
-    // Password, cannot be null
+
+    // Password: String
     password: {
         type: DataTypes.STRING,
         allowNull: false
@@ -59,9 +59,11 @@ User.init({
     tableName: 'users',
     hooks: {
         beforeCreate: async (user) => {
+            // We hash the password before a User is created.
             user.password = await User.hashPassword(user.password);
         },
         beforeUpdate: async (user) => {
+            // We hash the new password before a User's password is updated.
             if (user.changed('password')) {
                 user.password = await User.hashPassword(user.password);
             }
@@ -69,5 +71,5 @@ User.init({
     }
 });
 
-// Export the User model
+// We export the User model so we can use it in other parts of our app.
 module.exports = User;
