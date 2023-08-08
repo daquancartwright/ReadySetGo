@@ -12,7 +12,7 @@ class User extends Model {
 
     // Method to validate a plain text password against the user's hashed password.
     validPassword(password) {
-        return bcrypt.compareSync(password, this.password);
+        return bcrypt.compare(password, this.password);
     }
 }
 

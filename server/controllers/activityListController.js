@@ -1,13 +1,15 @@
 // Importing necessary modules and models
-const { ActivityList } = require('../models/activityList');
-const { User } = require('../models/user');
+const ActivityList = require('../models/activityList');
+const User = require('../models/user');
+
+const listController = {}
 
 // Create a new activity list
 exports.create = async (req, res) => {
     try {
         const userId = req.body.userId;
-        const listName = req.body.listName;
-        const memoryItems = req.body.memoryItems;
+        const activity = req.body.activity;
+        const items = req.body.items;
 
         const user = await User.findByPk(userId);
 
@@ -17,8 +19,8 @@ exports.create = async (req, res) => {
 
         const activityList = await ActivityList.create({ 
             userId: userId, 
-            listName: listName, 
-            memoryItems: memoryItems 
+            activity: activity, 
+            items: items 
         });
 
         res.json({ message: 'List created', activityList });
