@@ -1,3 +1,5 @@
+/* styles.css */
+
 /* Basic CSS Reset */
 * {
   margin: 0;
@@ -204,6 +206,12 @@ header {
 
 .list-title-input {
   margin-bottom: 10px;
+}
+
+.list-title {
+    font-weight: bold;
+    font-size: 24px;
+    /* Add any additional styling here */
 }
 
 .delete-item {

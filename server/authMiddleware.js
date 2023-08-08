@@ -1,3 +1,5 @@
+// authMiddleware.js
+
 const jwt = require('jsonwebtoken');
 
 // Middleware function to authenticate JWT tokens

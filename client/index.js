@@ -1,3 +1,5 @@
+// index.js
+
 // Wrap the whole script with the 'DOMContentLoaded' event listener
 document.addEventListener('DOMContentLoaded', (event) => {
     // Select the elements
@@ -42,9 +44,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         registerPage.style.display = 'none';
     }
 
-    // Server Port
-    const SERVER_PORT = 5500;
-
     // When the register form is submitted, collect the data and attempt to register user
     registerForm.addEventListener('submit', async function(event) {
         event.preventDefault();
@@ -61,12 +60,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 window.location.href = `welcome.html?username=${username}`;
             } else {
                 // If registration failed, show an error message
-                alert("Registration failed. Please try again.");
+                alert("Registration failed. Please try again.")
+                console.error(error);
             }
         } catch (error) {
             // If an error occurs while making the request, show error message and clg error.
             alert("Registration failed. Please check your inputs and try again.")
-            console.log(error);
+            console.error(error);
+
         }
     });
 
@@ -82,10 +83,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             if (response.data.message === 'Login successful!') {
                 window.location.href = 'dashboard.html';
             } else {
-                alert("Login failed. Please check your credentials and try again.");
+                alert("Login failed. Please check your credentials and try again.")
+                console.error(error);
             }
         } catch (error) {
-            alert("Login failed:" + " " + error);
+            alert("Login failed. Please check your credentials and try again.")
+            console.error(error);
         }
     });
 });

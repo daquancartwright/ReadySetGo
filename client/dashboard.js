@@ -1,12 +1,20 @@
+// dashboard.js
+
 document.addEventListener('DOMContentLoaded', () => {
-    const customizationSection = document.querySelector('.customization-section');
-    const itemList = document.querySelector('.item-list');
-    const customItemInput = document.querySelector('.custom-item-input');
-    const customDropdown = document.querySelector('.custom-dropdown');
-    const listTitleDisplay = document.querySelector('.list-title-display');
-    const listTitleInput = document.querySelector('.list-title-input');
-    const myLists = document.querySelector('#myLists')
-    const logoutButton = document.querySelector('#logout')
+    var customizationSection = document.querySelector('.customization-section');
+    var itemList = document.querySelector('.item-list');
+    var customItemInput = document.querySelector('.custom-item-input');
+    var customDropdown = document.querySelector('.custom-dropdown');
+    var dropdownBtn = document.querySelector('.dropdown-btn')
+    var addSelectedItemsBtn = document.querySelector('.add-selected-items-btn')
+    var listTitleDisplay = document.querySelector('.list-title-display');
+    var listTitleInput = document.querySelector('.list-title-input');
+    var myLists = document.querySelector('#myLists')
+    var logoutButton = document.querySelector('#logout')
+    var activityCards = document.querySelectorAll('.activity-card')
+    var stylishListTitle = document.querySelector('.stylish-list-title');
+
+    // customDropdown.style.display = 'none';
 
     // URL to the activity list API
     const apiUrl = "http://localhost:5500/api/activityList/";
@@ -43,7 +51,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentActivity = '';
 
-    // Add event listeners for MyLists and Logout
+    // Add event listeners 
+    listTitleInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            
+            // Preventing default behavior of Enter
+            event.preventDefault();           
+
+            // Getting the Custom Title
+            const customTitle = listTitleInput.value.trim();
+
+            listTitleDisplay.textContent = customTitle;
+            stylishListTitle.textContent = customTitle;
+            
+            
+            // Call function to update the list title display with the customized title
+            updateListTitle(customTitle);
+            
+            
+            // Clear the input field
+            listTitleInput.value = '';
+        }
+    })
+
     myLists.addEventListener('click', function(event) {
         event.preventDefault();
         navigateToListsPage();
@@ -87,17 +117,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    //////////////// Functions ////////////////
+
+    function updateListTitle(title) {
+        listTitleDisplay.textContent = title
+        refreshItemListDisplay();
+    }
+    
     function navigateToListsPage() {
         // Redirect the user to the My Lists page.
         window.location.href = 'myLists.html';
     }
-
+    
     function logout() {
         // This will serve as a placeholder until you implement authentication
         // Clear user session or token (once you've set up authentication)
         // Then, redirect the user to the login page or main page
         window.location.href = 'index.html'
     }
+    
 
     function handleActivityClick(cardElement) {
         currentActivity = cardElement.dataset.activity;
@@ -107,8 +145,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         customizationSection.removeAttribute('hidden');
         refreshItemListDisplay();
-        displayActivityItems(currentActivity);
+
+        // If the activity is custom don't call displayActivityItems
+        if (currentActivity !== 'custom') {
+            displayActivityItems(currentActivity)
+            dropdownBtn.style.display = 'inline'
+            addSelectedItemsBtn.style.display = 'inline'
+        } else {
+            displayActivityItems(currentActivity)
+            dropdownBtn.style.display = 'none'
+            addSelectedItemsBtn.style.display = 'none'
+        }
     }
+
 
     function displayActivityItems(activity) {
         customDropdown.innerHTML = '';
@@ -123,8 +172,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Stylish list Div
     function refreshItemListDisplay() {
         itemList.innerHTML = '';
+
+        // Get the title from the 'list-title-display' span
+        const titleText = document.querySelector('.list-title-display').textContent;
+
+        // Set the text content of the 'stylish-list-title' h2 element to the titleText
+        stylishListTitle.textContent = titleText + ' List';
+
+        // Iterate through the activity list and create list items for each
         activityLists[currentActivity].forEach(item => {
             const li = document.createElement('li');
 

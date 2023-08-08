@@ -1,3 +1,6 @@
+// activityList.js
+
+// Imports
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');  // Importing sequelize from db.js
 const User = require('./user');  // Importing the User model

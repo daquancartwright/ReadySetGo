@@ -1,9 +1,11 @@
+// activityListRoutes.js
+
 // Importing required modules
 const express = require('express');
-const ActivityListController = require('../controllers/activityListController');  // Ensure the path is correct
+const ActivityListController = require('../controllers/activityListController');  
 
 // Importing the authenticateJWT middleware
-const { authenticateJWT } = require('../authMiddleware'); // Update the path if needed
+const { authenticateJWT } = require('../authMiddleware'); 
 
 // We initialize an Express router.
 const router = express.Router();

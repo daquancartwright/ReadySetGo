@@ -1,11 +1,13 @@
+// activityListController
+
 // Importing necessary modules and models
 const ActivityList = require('../models/activityList');
 const User = require('../models/user');
 
-const listController = {}
+const activityListController = {}
 
 // Create a new activity list
-exports.create = async (req, res) => {
+activityListController.create = async (req, res) => {
     try {
         const userId = req.body.userId;
         const activity = req.body.activity;
@@ -32,7 +34,7 @@ exports.create = async (req, res) => {
 };
 
 // Get all activity lists for a user
-exports.getAllForUser = async (req, res) => {
+activityListController.getAllForUser = async (req, res) => {
     try {
         const userId = req.params.userId;
 
@@ -57,7 +59,7 @@ exports.getAllForUser = async (req, res) => {
 };
 
 // Update an activity list
-exports.update = async (req, res) => {
+activityListController.update = async (req, res) => {
     const { id } = req.params;
     const { activity } = req.body;
 
@@ -77,7 +79,7 @@ exports.update = async (req, res) => {
 };
 
 // Delete an activity list
-exports.delete = async (req, res) => {
+activityListController.delete = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -92,3 +94,5 @@ exports.delete = async (req, res) => {
         res.status(500).json(err);
     }
 };
+
+module.exports = activityListController;

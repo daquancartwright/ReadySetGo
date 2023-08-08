@@ -1,3 +1,5 @@
+// user.js
+
 // We import Sequelize and our sequelize instance.
 const { DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
