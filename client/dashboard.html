@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <nav>
+        <h1 id="header-logo">ReadySetGo</h1>
+        <div>
+            <a href="#" id="myLists">My Lists</a>/
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </nav>
     <div class="activity-grid">
         <!-- Sample activity cards. You can add more with the same structure. -->
         <div class="activity-card" data-activity="camping" onclick="handleActivityClick('camping')">
@@ -37,7 +43,6 @@
                 <h3>Hiking</h3>
             </div>
         </div>
-    
     
         <div class="activity-card" data-activity="painting" onclick="handleActivityClick('painting')">
             <img src=https://soworkshop.com/wp-content/uploads/2021/09/paint-and-sip-tips.jpg alt="Painting">
@@ -82,13 +87,13 @@
         </div>
     
         <div class="activity-card" data-activity="picnic" onclick="handleActivityClick('picnic')">
-            <img src=https://consettmagazine.com/wp-content/uploads/2014/04/picnic1.jpg alt="Picnic">
+            <img src=https://consettmagazine.com/wp-content/uploads/2014/04/picnic1.jpg  alt="Picnic">
             <div class="activity-label">
                 <h3>Picnic</h3>
             </div>
         </div>
         
-        <!-- Add more activity cards here -->
+        <!-- Custom List -->
     
         <div class="activity-card" data-activity="custom" onclick="handleActivityClick('custom')">
             <img src="https://sunshineandravioli.net/cdn/shop/products/il_fullxfull.2304308055_rc63_2048x.jpg?v=1650203315" alt="Custom">

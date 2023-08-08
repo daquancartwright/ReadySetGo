@@ -1,25 +1,35 @@
 const User = require('../models/user');
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const userController = {};
 
-// The registerUser function creates a new User.
+// The registerUser function creates a new User and returns a JWT token.
 userController.registerUser = async (req, res) => {
-    try {
+    try {       
         const newUser = await User.create({
             username: req.body.username,
-            password: req.body.password,
+            password: req.body.password,  // Save hashed password
             email: req.body.email
         });
 
-        // If the User is successfully created, we send a 201 (created) status and a message.
-        res.status(201).json({ message: 'User registered successfully!', user: newUser });
+        // Create and sign the JWT token
+        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN
+        });
+
+        // If the User is successfully created, we send a 201 (created) status, a JWT token, and a message.
+        res.status(201).json({
+            message: 'User registered successfully!',
+            token: token,
+            user: newUser
+        });
     } catch (error) {
         // If there's an error, we send a 500 (server error) status and a message.
         res.status(500).json({ error: 'Registration failed.' });
     }
 };
 
-// The loginUser function authenticates a User.
+// The loginUser function authenticates a User and returns a JWT token.
 userController.loginUser = async (req, res) => {
     try {
         // Check if the username exists in the database
@@ -31,15 +41,24 @@ userController.loginUser = async (req, res) => {
         }
 
         // Validate the password against the hashed password in the database
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        const validPassword = user.validPassword(req.body.password);
         
         // If password is not valid, send error response
         if (!validPassword) {
-            return res.status(400).json({ error: 'Invalid password.' });
+            return res.status(400).json({ error: 'Invalid password.' })        
         }
 
-        // Send successful login response
-        res.status(200).json({ message: 'Login successful!' });
+        // Create and sign the JWT token for valid users
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN
+        });
+
+        // Send successful login response with the JWT token
+        res.status(200).json({
+            message: 'Login successful!',
+            token: token,
+            user: user
+        });
     } catch (error) {
         // Send error response in case of failure
         res.status(500).json({ error: 'Login failed.' });

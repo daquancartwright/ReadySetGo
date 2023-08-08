@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const customDropdown = document.querySelector('.custom-dropdown');
     const listTitleDisplay = document.querySelector('.list-title-display');
     const listTitleInput = document.querySelector('.list-title-input');
+    const myLists = document.querySelector('#myLists')
+    const logoutButton = document.querySelector('#logout')
+
+    // URL to the activity list API
+    const apiUrl = "http://localhost:5500/api/activityList/";
 
     const activityItems = {
         camping: ['Tent', 'Stakes', 'Portable Stove', 'Flashlight', 'Bug Repellent', 'First Aid', 'Sleeping bag', 'Firestarter'],
@@ -38,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentActivity = '';
 
+    // Add event listeners for MyLists and Logout
+    myLists.addEventListener('click', function(event) {
+        event.preventDefault();
+        navigateToListsPage();
+    })
+
+    logoutButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        logout();
+    })
+
     document.querySelector('.dropdown-btn').addEventListener('click', function() {
         customDropdown.style.display = customDropdown.style.display === 'none' ? 'block' : 'none';
     });
@@ -70,6 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteItem(event.target);
         }
     });
+
+    function navigateToListsPage() {
+        // Redirect the user to the My Lists page.
+        window.location.href = 'myLists.html';
+    }
+
+    function logout() {
+        // This will serve as a placeholder until you implement authentication
+        // Clear user session or token (once you've set up authentication)
+        // Then, redirect the user to the login page or main page
+        window.location.href = 'index.html'
+    }
 
     function handleActivityClick(cardElement) {
         currentActivity = cardElement.dataset.activity;

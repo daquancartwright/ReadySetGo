@@ -18,7 +18,7 @@ class User extends Model {
 
 // We initialize our User model with its properties and methods.
 User.init({
-
+    
     // Username: STRING
     username: {
         type: DataTypes.STRING,
@@ -70,6 +70,13 @@ User.init({
         }
     }
 });
+
+// Importing the ActivityList model after User model is defined.
+const ActivityList = require('./activityList');  // Importing the ActivityList model
+
+// Setting up the relationship between User and ActivityList
+User.hasMany(ActivityList, { foreignKey: 'userId' });
+ActivityList.belongsTo(User, { foreignKey: 'userId' });
 
 // We export the User model so we can use it in other parts of our app.
 module.exports = User;

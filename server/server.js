@@ -5,8 +5,15 @@ const path = require('path');
 require('dotenv').config();
 const sequelize = require('./db');  // Importing sequelize from db.js
 
-// Importing the user routes, so we can use the endpoints in this file.
+const { authenticateJWT } = require('./authMiddleware');
+
+// Importing our Routes
 const userRoutes = require('./routes/userRoutes');
+const activityListRoutes = require('./routes/activityListRoutes');
+
+// Importing models
+const User = require('./models/user');  // Importing the User model
+const ActivityList = require('./models/activityList');  // Importing the ActivityList model
 
 // We initialize the Express application.
 const app = express();
@@ -27,6 +34,8 @@ app.use(express.static(path.join(__dirname, '../client')));
 sequelize.authenticate()
     .then(() => {
         console.log('Database connection has been established successfully.');
+        
+        // Synchronizing all models
         sequelize.sync();
     })
     .catch(err => {
@@ -35,10 +44,19 @@ sequelize.authenticate()
 
 // Middleware to use the user routes.
 app.use('/api/users', userRoutes);
+// Middleware to use the activityList routes.
+app.use('/api/activity-lists',authenticateJWT, activityListRoutes);
+
 
 // Test route to check if our server is working.
 app.get('/', (req, res) => {
     res.send('Hello World!');
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'An error occurred.' });
 });
 
 // We set the port for our server to run on and start the server.

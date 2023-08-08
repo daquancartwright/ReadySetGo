@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const response = await axios.post(`/api/users/register`, { username, email, password });
             if (response.data.message === 'User registered successfully!') {
                 // Redirect to welcome page
-                window.location.href = 'welcome.html';
+                window.location.href = `welcome.html?username=${username}`;
             } else {
                 // If registration failed, show an error message
                 alert("Registration failed. Please try again.");
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 alert("Login failed. Please check your credentials and try again.");
             }
         } catch (error) {
-            alert("Login failed. Please check your credentials and try again.");
+            alert("Login failed:" + " " + error);
         }
     });
 });
