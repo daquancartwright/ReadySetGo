@@ -27,6 +27,8 @@ router.put('/update/:id', ActivityListController.update);
 // router.delete('/delete/:id', authenticateJWT, ActivityListController.delete);
 router.delete('/delete/:id', ActivityListController.delete);
 
+// Route for posting saved activityLists to the db
+
 
 // We export the router so we can use it in our main server file.
 module.exports = router;

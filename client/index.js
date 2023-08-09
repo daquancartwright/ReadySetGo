@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 window.location.href = `welcome.html?username=${username}`;
             } else {
                 // If registration failed, show an error message
-                alert("Registration failed. Please try again.")
-                console.error(error);
+                alert("Registration failed. Please try again.");
+                console.error(response);
             }
         } catch (error) {
             // If an error occurs while making the request, show error message and clg error.
@@ -81,12 +81,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         try {
             const response = await axios.post(`/api/users/login`, { username, password });
             if (response.data.message === 'Login successful!') {
-                window.location.href = 'dashboard.html';
                 // Store the JWT token in localStorage
+                localStorage.setItem('jwtToken', response.data.token)
 
+                // Redirect to the dashboard
+                window.location.href = 'dashboard.html';
             } else {
                 alert("Login failed. Please check your credentials and try again.")
-                console.error(error);
             }
         } catch (error) {
             alert("Login failed. Please check your credentials and try again.")

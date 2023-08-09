@@ -7,17 +7,24 @@ const authenticateJWT = (req, res, next) => {
     // Get the token from the header (typically in the 'Authorization' header)
     const authHeader = req.headers.authorization;
 
+    if (!authHeader) {
+        return res.status(403).json({ error: 'No token provided.' });
+}
+
     // Check if the token exists
     if (authHeader) {
-        // The token is usually in the format "Bearer TOKEN_VALUE"
+        // Format is as such "Bearer TOKEN_VALUE"
         const token = authHeader.split(' ')[1];
 
+        // Log the token to the console
+        // console.log('Extracted Token:', token);
+
         // Verify the token using the JWT_SECRET from the environment variables
-        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        jwt.verify(token, 'KotoAmatsukami@1', (err, user) => {
             // If there's an error (e.g., token expired or is invalid), return a 403 (Forbidden) status
             if (err) {
                 console.log("JWT Verification Error:", err);
-                return res.sendStatus(403);
+                return res.status(403).json({ error: 'Failed to authenticate token.' });
             }
 
             // Add the user payload from the JWT to the request object
@@ -38,3 +45,28 @@ const authenticateJWT = (req, res, next) => {
 module.exports = {
     authenticateJWT
 };
+
+
+//////////////////////////////////////////////////////
+// const jwt = require('jsonwebtoken');
+
+// const authenticateJWT = (req, res, next) => {
+//     const token = req.header('Authorization'); // Get the token from the headers
+
+//     if (!token) {
+//         return res.status(403).json({ message: 'No token provided.' });
+//     }
+
+//     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+//         if (err) {
+//             return res.status(500).json({ message: 'Failed to authenticate token.' });
+//         }
+
+//         // Attach the user ID to the request object
+//         req.userId = decoded.id; // Assuming the decoded JWT contains the user ID as 'id'
+
+//         next(); // Proceed to the next middleware
+//     });
+// };
+
+// module.exports = { authenticateJWT };

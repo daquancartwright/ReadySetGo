@@ -1,4 +1,6 @@
 // dashboard.js
+// import jwtDecode from '../jwt-decode.min.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     var customizationSection = document.querySelector('.customization-section');
@@ -13,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var logoutButton = document.querySelector('#logout')
     var activityCards = document.querySelectorAll('.activity-card')
     var stylishListTitle = document.querySelector('.stylish-list-title');
+    var saveListButton = document.querySelector('.save-list-btn')
+    var token = localStorage.getItem('jwtToken');
+    // var decodedToken = jwtDecode(token);
 
     // customDropdown.style.display = 'none';
 
@@ -52,6 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentActivity = '';
 
     // Add event listeners 
+    saveListButton.addEventListener('click', function() {
+        // Get user input from the form
+        // const userId = decodedToken.id // help me here
+        const activity = document.querySelector('.list-title-display').textContent;
+        const items = activityLists[currentActivity];
+
+        // Validation for custom title
+
+        // Call saveActivityList function with required data
+        saveActivityList(userId, activity, items);
+    });
+
+
     listTitleInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             
@@ -108,9 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
             addSelectedItems();
         }
 
-        if (event.target.classList.contains('save-list-btn')) {
-            saveCustomizedList();
-        }
+        // if (event.target.classList.contains('save-list-btn')) {
+        //     // saveCustomizedList();
+        //     // saveActivityList();
+        // }
 
         if (event.target.classList.contains('delete-item')) {
             deleteItem(event.target);
@@ -130,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function logout() {
-        // This will serve as a placeholder until you implement authentication
         // Clear user session or token (once you've set up authentication)
+        localStorage.removeItem('jwtToken')       
         // Then, redirect the user to the login page or main page
         window.location.href = 'index.html'
     }
@@ -225,16 +244,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function saveCustomizedList() {
-        if (currentActivity === 'custom') {
-            const customTitle = listTitleInput.value.trim();
-            if (!customTitle) {
-                alert("Please enter a title for your custom list.");
-                return;
-            }
-            listTitleDisplay.textContent = customTitle;
-        }
-        console.log('List saved for', currentActivity);
+    // function saveCustomizedList() {
+    //     if (currentActivity === 'custom') {
+    //         const customTitle = listTitleInput.value.trim();
+    //         if (!customTitle) {
+    //             alert("Please enter a title for your custom list.");
+    //             return;
+    //         }
+    //         listTitleDisplay.textContent = customTitle;
+    //     }
+    //     console.log('List saved for', currentActivity);
+    // }
+
+    function saveActivityList(userId, activity, items) {
+        // Retrieve the token
+        const token = localStorage.getItem('jwtToken')
+        console.log(`JWT Token: ` + token)
+
+        // Prepare the data
+        const data = {
+            userId: userId,
+            activity: activity,
+            items: items
+        };
+        
+        // Check that data is logged correctly
+        console.log('Activity List: ' + data)
+        console.log('User id: ' + userId)
+        console.log('Activity: ' + activity)
+        console.log('Items: ' + items)
+
+        // Send a POST request to the server
+        fetch('/api/activity-lists/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('List Created:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     function capitalizeFirstLetter(string) {

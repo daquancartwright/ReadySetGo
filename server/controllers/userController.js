@@ -4,6 +4,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
+
 const userController = {};
 
 // The registerUser function creates a new User and returns a JWT token.
@@ -16,8 +17,8 @@ userController.registerUser = async (req, res) => {
         });
 
         // Create and sign the JWT token
-        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRES_IN
+        const token = jwt.sign({ id: newUser.id },'KotoAmatsukami@1', {
+            expiresIn: '1h'
         });
 
         // If the User is successfully created, we send a 201 (created) status, a JWT token, and a message.
@@ -52,8 +53,8 @@ userController.loginUser = async (req, res) => {
         }
 
         // Create and sign the JWT token for valid users
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRES_IN
+        const token = jwt.sign({ id: user.id }, 'KotoAmatsukami@1', {
+            expiresIn: '1h'
         });
 
         // Send successful login response with the JWT token

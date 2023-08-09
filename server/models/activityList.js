@@ -17,11 +17,21 @@ ActivityList.init({
         allowNull: false
     },
 
-    // Items: Text
+    // Items: Array
     items: {
+        // type: DataTypes.ARRAY(DataTypes.STRING),
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        // Deserialize the JSON string back to an array
+        get() {
+            return JSON.parse(this.getDataValue('items'));
+        },
+        // Serialize the array to a JSON String
+        set(val) {
+            this.setDataValue('items', JSON.stringify(val))
+        }
     },
+
 
     // User Id: Foreign Key
     userId: {

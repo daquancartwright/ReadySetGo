@@ -10,6 +10,7 @@ const activityListController = {};
 activityListController.create = async (req, res) => {
     try {
         const userId = req.body.userId;
+        // const userId = req.userId;
         const activity = req.body.activity;
         const items = req.body.items;
 
@@ -29,7 +30,7 @@ activityListController.create = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Something went wrong bro' });
     }
 };
 
