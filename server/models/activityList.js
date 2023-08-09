@@ -10,6 +10,7 @@ class ActivityList extends Model {}
 
 // We initialize our ActivityList model with its properties.
 ActivityList.init({
+    
     // Activity: String
     activity: {
         type: DataTypes.STRING,

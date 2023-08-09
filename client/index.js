@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const response = await axios.post(`/api/users/login`, { username, password });
             if (response.data.message === 'Login successful!') {
                 window.location.href = 'dashboard.html';
+                // Store the JWT token in localStorage
+
             } else {
                 alert("Login failed. Please check your credentials and try again.")
                 console.error(error);

@@ -16,6 +16,7 @@ const authenticateJWT = (req, res, next) => {
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
             // If there's an error (e.g., token expired or is invalid), return a 403 (Forbidden) status
             if (err) {
+                console.log("JWT Verification Error:", err);
                 return res.sendStatus(403);
             }
 
@@ -28,6 +29,7 @@ const authenticateJWT = (req, res, next) => {
             next();
         });
     } else {
+        console.log('Authorization Header Missing')
         // If no token is provided, return a 401 (Unauthorized) status
         res.sendStatus(401);
     }

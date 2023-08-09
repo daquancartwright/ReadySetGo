@@ -4,7 +4,7 @@
 const ActivityList = require('../models/activityList');
 const User = require('../models/user');
 
-const activityListController = {}
+const activityListController = {};
 
 // Create a new activity list
 activityListController.create = async (req, res) => {

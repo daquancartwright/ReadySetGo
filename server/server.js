@@ -7,7 +7,7 @@ const path = require('path');
 require('dotenv').config();
 const sequelize = require('./db');  // Importing sequelize from db.js
 
-const { authenticateJWT } = require('./authMiddleware');
+// const { authenticateJWT } = require('./authMiddleware');
 
 // Importing our Routes
 const userRoutes = require('./routes/userRoutes');
@@ -46,8 +46,9 @@ sequelize.authenticate()
 
 // Middleware to use the user routes.
 app.use('/api/users', userRoutes);
+
 // Middleware to use the activityList routes.
-app.use('/api/activity-lists',authenticateJWT, activityListRoutes);
+app.use('/api/activity-lists', activityListRoutes);
 
 
 // Test route to check if our server is working.
