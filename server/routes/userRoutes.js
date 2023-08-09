@@ -11,5 +11,8 @@ router.post('/register', userController.registerUser);
 // We define the routes for user login.
 router.post('/login', userController.loginUser);
 
+// We define the route for retrieving the userId
+router.get('/getUserId', userController.getUserId);
+
 // We export the router object so we can use it in other parts of our app.
 module.exports = router;

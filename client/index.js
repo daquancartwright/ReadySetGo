@@ -1,5 +1,4 @@
 // index.js
-
 // Wrap the whole script with the 'DOMContentLoaded' event listener
 document.addEventListener('DOMContentLoaded', (event) => {
     // Select the elements
@@ -56,6 +55,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // Make a Post req to the register route
             const response = await axios.post(`/api/users/register`, { username, email, password });
             if (response.data.message === 'User registered successfully!') {
+                // Store the JWT token in localStorage
+                localStorage.setItem('jwtToken', response.data.token)
+
                 // Redirect to welcome page
                 window.location.href = `welcome.html?username=${username}`;
             } else {

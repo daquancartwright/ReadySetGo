@@ -10,7 +10,6 @@ const activityListController = {};
 activityListController.create = async (req, res) => {
     try {
         const userId = req.body.userId;
-        // const userId = req.userId;
         const activity = req.body.activity;
         const items = req.body.items;
 

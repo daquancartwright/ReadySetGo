@@ -1,6 +1,4 @@
 // dashboard.js
-// import jwtDecode from '../jwt-decode.min.js';
-
 
 document.addEventListener('DOMContentLoaded', () => {
     var customizationSection = document.querySelector('.customization-section');
@@ -16,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var activityCards = document.querySelectorAll('.activity-card')
     var stylishListTitle = document.querySelector('.stylish-list-title');
     var saveListButton = document.querySelector('.save-list-btn')
-    var token = localStorage.getItem('jwtToken');
+    // var token = localStorage.getItem('jwtToken');
     // var decodedToken = jwtDecode(token);
 
     // customDropdown.style.display = 'none';
@@ -57,11 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentActivity = '';
 
     // Add event listeners 
-    saveListButton.addEventListener('click', function() {
+    saveListButton.addEventListener('click', async function() {
+        
         // Get user input from the form
-        // const userId = decodedToken.id // help me here
+        const userId = await fetchId();
         const activity = document.querySelector('.list-title-display').textContent;
         const items = activityLists[currentActivity];
+
+        // console.log(userId)
 
         // Validation for custom title
 
@@ -290,6 +291,23 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch((error) => {
             console.error('Error:', error);
         });
+    }
+
+    function fetchId() {
+        const token = localStorage.getItem('jwtToken')
+        
+        return fetch('/api/users/getUserId', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            return data.userId;
+        })
+        .catch(error => console.error('An error occurred:', error))
     }
 
     function capitalizeFirstLetter(string) {
