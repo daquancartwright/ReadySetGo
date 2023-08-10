@@ -54,7 +54,9 @@ activityListController.getAllForUser = async (req, res) => {
 
         const user = await User.findByPk(userId);
 
+        // Check if the user exists
         if (!user) {
+            console.log(`Error: User with userId ${userId} not found`); // Log error if user not found
             return res.status(404).json({ message: 'User not found' });
         }
 
@@ -64,19 +66,21 @@ activityListController.getAllForUser = async (req, res) => {
             }
         });
 
-        res.json(activityLists);
+        // Extracting the 'id' from each activity list
+        const ids = activityLists.map(activityList => activityList.id);
+
+        console.log(`Successfully retrieved activity list IDs for userId ${userId}:`, ids); // Log success
+        res.json(ids); // Respond with the array of IDs
 
     } catch (error) {
-        console.log(error);
+        console.log(`Error retrieving activity lists for userId ${userId}:`, error); // Log error with details
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
 
+
 // Update an activity list
 activityListController.update = async (req, res) => {
-    // Log the request body
-    console.log("Request Body:", req.body);
-    
     const { id, userId } = req.params;
     const { activity, items } = req.body;
 

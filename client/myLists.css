@@ -1,0 +1,151 @@
+/* General styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke; /* white background */
+  }
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Activity grid container */
+.activity-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Activity card styling */
+.activity-card {
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.activity-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .activity-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: rgba(255, 255, 255, 0.7); */
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+  }
+
+.activity-label h3 {
+    margin: 0;
+    color: white;
+}
+
+/* Stylish list container */
+.stylish-list {
+    margin: 20px;
+}
+
+.stylish-list h3 {
+    color: #333;
+}
+
+.item-list {
+    list-style: none;
+    padding: 0;
+}
+
+.item-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.delete-button {
+    float: right;
+    color: red;
+    cursor: pointer;
+}
+
+/* Dropdown section styling */
+.dropdown-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.add-item-btn,
+.update-list-btn {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #b2d8d8;
+}
+
+.custom-dropdown {
+    width: 200px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.item-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+}
+
+/* Navigation Bar Styles */
+nav {
+    background-color: #b2d8d8; /* light teal */
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    color: #ffffff;
+  }
+  
+nav a {
+color: #ffffff;
+text-decoration: none;
+margin-left: 0.5em;
+}
+
+  /* Add a hover effect for links to show they're interactive */
+nav a:hover,
+#header-logo:hover {
+    color: #003333; /* Darker shade of teal */
+    cursor: pointer;
+}
+
+/* Increase spacing between navigation links for better touch target size and visual separation */
+nav a:not(:last-child) {
+    margin-right: 1em;
+}
+
+/* Change the color when link is actively being clicked */
+nav a:active,
+#header-logo:active {
+    color: #004d4d; /* Even darker shade of teal for an active/click effect */
+}
+
+/* Style the h1 logo in the header for better visual indication and separation */
+#header-logo {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer; /* Shows hand icon indicating it's clickable */
+}

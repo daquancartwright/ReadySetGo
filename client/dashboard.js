@@ -14,10 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     var activityCards = document.querySelectorAll('.activity-card')
     var stylishListTitle = document.querySelector('.stylish-list-title');
     var saveListButton = document.querySelector('.save-list-btn')
-    // var token = localStorage.getItem('jwtToken');
-    // var decodedToken = jwtDecode(token);
-
-    // customDropdown.style.display = 'none';
 
     // URL to the activity list API
     const apiUrl = "http://localhost:5500/api/activityList/";
@@ -126,11 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('add-selected-items-btn')) {
             addSelectedItems();
         }
-
-        // if (event.target.classList.contains('save-list-btn')) {
-        //     // saveCustomizedList();
-        //     // saveActivityList();
-        // }
 
         if (event.target.classList.contains('delete-item')) {
             deleteItem(event.target);
@@ -245,18 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // function saveCustomizedList() {
-    //     if (currentActivity === 'custom') {
-    //         const customTitle = listTitleInput.value.trim();
-    //         if (!customTitle) {
-    //             alert("Please enter a title for your custom list.");
-    //             return;
-    //         }
-    //         listTitleDisplay.textContent = customTitle;
-    //     }
-    //     console.log('List saved for', currentActivity);
-    // }
-
     function saveActivityList(userId, activity, items) {
         // Retrieve the token
         const token = localStorage.getItem('jwtToken')
@@ -286,7 +265,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then((response) => response.json())
         .then((data) => {
+            // Check for an error in response
+            if (data.error) {
+                alert(data.error)
+            } else {
             console.log('List Created:', data);
+            }
         })
         .catch((error) => {
             console.error('Error:', error);

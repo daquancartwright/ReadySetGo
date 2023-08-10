@@ -21,7 +21,7 @@ router.get('/:userId', ActivityListController.getAllForUser);
 
 // Route for updating an activityList
 // router.put('/update/:id', authenticateJWT, ActivityListController.update);
-router.put('/update/:id', ActivityListController.update);
+router.put('/update/:userId/:id', ActivityListController.update);
 
 // Route for deleting an activityList
 // router.delete('/delete/:id', authenticateJWT, ActivityListController.delete);

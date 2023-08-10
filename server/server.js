@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use('/api/users', userRoutes);
 
 // Middleware to use the activityList routes.
-app.use('/api/activity-lists', authenticateJWT, activityListRoutes);
+app.use('/api/activity-lists', activityListRoutes);
 
 
 // Test route to check if our server is working.

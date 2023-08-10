@@ -1,11 +1,49 @@
+<!-- myLists.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Lists</title>
+    <link rel="stylesheet" href="myLists.css">
 </head>
 <body>
+    <nav>
+        <h1 id="header-logo">ReadySetGo</h1>
+        <div>
+            <a href="#" id="myLists">My Lists</a>/
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </nav>
+    <h1>My Activity Lists</h1>
+    <div class="activity-grid"></div> <!-- Container to display the lists -->
+    <!-- myLists.html -->
+    
+    <div class="customization-section" hidden>
+        <!-- <h2><span class="list-title-display">List Title</span></h2> -->
+        <input type="text" class="list-title-input" placeholder="Enter list title..." hidden>
+        
+        <div class="dropdown-section">
+            <div class="custom-dropdown" style="display: none;">
+                <!-- Items with checkboxes will be dynamically populated here -->
+            </div>
+            
+        </div>
+        
+        <input type="text" class="item-input" placeholder="Input item...">
+        <button class="add-item-btn">Add Item</button>
+        
+        <div class="stylish-list">
+            <h2 class="stylish-list-title"><!-- --></h2>
+            <ul class="item-list">
+                <!-- Customized list will be dynamically populated here -->
+            </ul>
+        </div>
+        
+        <button class="update-list-btn">Update List</button>
+    </div>
+    <script src="myLists.js" defer></script> 
     
 </body>
 </html>

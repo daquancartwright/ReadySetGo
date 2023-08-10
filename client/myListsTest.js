@@ -1,13 +1,8 @@
-// let userId;
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    let userId;
     var addItemBtn = document.querySelector('.add-item-btn');
     var itemInput = document.querySelector('.item-input');
     var updateListBtn = document.querySelector('.update-list-btn')
-    var logoutButton = document.querySelector('#logout')
-    const headerLogo = document.querySelector('#header-logo');
 
     // Define currentActivity and currentItems
     var activityStates = {}
@@ -15,19 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     var currentItems = [];
 
     // Event Listeners
-
-    // When the ReadySetGo is clicked, hide all sections, and show the home page 
-    headerLogo.addEventListener('click', function(event) {
-        event.preventDefault();
-        window.location.href = 'dashboard.html'
-    });
-
-    // Logout
-    logoutButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        logout();
-    })
-
     // New Event Listener: Detecting the Enter key
     itemInput.addEventListener('keyup', (event) => {
         // Check if the key pressed was 'Enter'
@@ -66,13 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateListBtn.addEventListener('click', async () => {
         // Make sure the current activity and items are defined
         // if (!currentActivity || currentItems.length === 0) return;
-        if (!currentActivity) return;
-
-        const userId = await fetchId();
-        const activityId = currentActivity.id;
-
+        if (currentActivity) return;
         // Define the URL for the update endpoint
-        const url = `http://localhost:5500/api/activity-lists/update/${userId}/34`;
+        const url = `http://localhost:5500/api/activity-lists/update/${userId}/${id}`;
 
     
         // Make a PUT request to the update endpoint
@@ -84,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({
                     activity: currentActivity,
-                    items: currentItems.map(item => item.text),
+                    items: currentItems,
                 }),
             });
     
@@ -105,43 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const url = `http://localhost:5500/api/activity-lists/${userId}`;
             const response = await fetch(url);
-    
-            // Check if response is not OK
-            if (!response.ok) {
-                console.error(`Error fetching lists: ${response.statusText}`);
+
+            if (response.status === 404) {
+                alert('User not found');
                 return;
             }
-    
+
             const lists = await response.json();
-    
-            // Check if lists is an array
-            if (!Array.isArray(lists)) {
-                console.error('Error fetching lists: Response is not an array');
-                return;
-            }
-    
-            // Collect the List ID's
-            lists.forEach(list => {
-                list.id = list.id // Save the ID in the list object
-            })
             renderLists(lists);
         } catch (error) {
             console.error('Error fetching lists:', error);
         }
     }
-    
-    // Helper function to capitalize the first letter of a string
-    function capitalizeFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
 
-    // Logout Function
-    function logout() {
-        // Clear user session or token (once you've set up authentication)
-        localStorage.removeItem('jwtToken')       
-        // Then, redirect the user to the login page or main page
-        window.location.href = 'index.html'
-    }
 
     // Function to render the lists on the page
     function renderLists(lists) {
@@ -156,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create a div for each list (activity card)
             const listDiv = document.createElement('div');
             listDiv.className = 'activity-card';
-            listDiv.setAttribute('data-activity', list.activity);
+            listDiv.setAttribute('data-activity', list.activity.toLowerCase());
 
             // Add the image for the activity
             const img = document.createElement('img');
@@ -176,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add click listener event to the activity card
             listDiv.addEventListener('click', () => {
                 // Initialize the state for each activity
-                if (!activityStates[list.activity]) {
-                    activityStates[list.activity] = list.items.map(item => ({ text: item, completed: false }));
+                if (!activityStates[list.activity.toLowerCase()]) {
+                    activityStates[list.activity.toLowerCase()] = list.items.map(item => ({ text: item, completed: false }));
                 }
 
                 // Get the customization section and make it visible
@@ -195,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Updated renderActivityList function
     function renderActivityList(activity, items) {
-        currentActivity = activity;
+        currentActivity = activity.toLowerCase();
         // currentItems = items;
 
         // Check if the activity state already exists, otherwise initialize
