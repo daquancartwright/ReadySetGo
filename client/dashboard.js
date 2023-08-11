@@ -30,7 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
         beach: ['Towel', 'Sunglasses', 'Beach Chair', 'Snacks', 'Boards', 'Portable Speaker', 'Cooler'],
         fishing: ['Fishing Rod', 'Bait', 'Tackle Box', 'Fishing License', 'Cooler', 'Net', 'Guidebook'],
         picnic: ['Picnic Blanket', 'Basket', 'Utensils', 'Trash Bags', 'Bug Spray'],
-        custom: []
+        custom: [],
+        'grocery shopping': ['Milk', 'Eggs', 'Cheese', 'Watermelon', 'Mangoes', 'Avocado', 'Cherries', 'Grapes'],
+        'movie night': ['Movie', 'Popcorn', 'Snacks', 'Beverages', 'TV', 'Projector', 'Blankets', 'Remote'],
+        'game night': ['Board Games', 'Seating', 'Scorecards', 'Timer', 'Snacks', 'Beverages', 'Music'],
+        'amusement park': ['Tickets', 'Map', 'Sunscreen', 'Hat', 'Backpack', 'Water Bottle', 'Snacks', 'Camera', 'Fast pass'],
+        karaoke: ['Karaoke machine', 'Microphones', 'Song List', 'Lyric Sheet', 'Stage'],
+        wedding: ['Venue', 'Invitations', 'Catering', 'Florist', 'Music', 'Cake'],
+        school: ['Pencils', 'Backpack', 'Glue', 'Retractor', 'Books', 'Notebooks', 'Highlighter', 'Calculator'],
+
     };
 
     let activityLists = {
@@ -45,7 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
         beach: [],
         fishing: [],
         picnic: [],
-        custom: []
+        custom: [],
+        'grocery shopping': [],
+        'movie night': [],
+        'game night': [],
+        'amusement park': [],
+        karaoke: [],
+        wedding: [],
+        school: [],
     };
 
     let currentActivity = '';
@@ -57,10 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const userId = await fetchId();
         const activity = document.querySelector('.list-title-display').textContent;
         const items = activityLists[currentActivity];
-
-        // console.log(userId)
-
-        // Validation for custom title
 
         // Call saveActivityList function with required data
         saveActivityList(userId, activity, items);
@@ -239,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function saveActivityList(userId, activity, items) {
         // Retrieve the token
         const token = localStorage.getItem('jwtToken')
-        console.log(`JWT Token: ` + token)
 
         // Prepare the data
         const data = {
@@ -247,12 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
             activity: activity,
             items: items
         };
-        
-        // Check that data is logged correctly
-        console.log('Activity List: ' + data)
-        console.log('User id: ' + userId)
-        console.log('Activity: ' + activity)
-        console.log('Items: ' + items)
 
         // Send a POST request to the server
         fetch('/api/activity-lists/create', {
@@ -269,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.error) {
                 alert(data.error)
             } else {
+            alert(`${activity} List Created`)
             console.log('List Created:', data);
             }
         })

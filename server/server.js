@@ -7,10 +7,6 @@ const path = require('path');
 require('dotenv').config();
 const sequelize = require('./db');  // Importing sequelize from db.js
 const { authenticateJWT } = require('./authMiddleware');
-const { Pool } = require('pg')
-
-// Create a new Poos
-// const pool = new Pool
 
 // Importing our Routes
 const userRoutes = require('./routes/userRoutes');
@@ -33,16 +29,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client')));
 
 // Authenticating the connection with the database. If successful, the connection is established.
-// sequelize.authenticate()
-//     .then(() => {
-//         console.log('Database connection has been established successfully.');
+sequelize.authenticate()
+    .then(() => {
+        console.log('Database connection has been established successfully.');
         
-//         // Synchronizing all models
+        // Synchronizing all models
         sequelize.sync();
-//     })
-//     .catch(err => {
-//         console.error('Unable to connect to the database:', err);
-//     });
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
 // Middleware to use the user routes.
 app.use('/api/users', userRoutes);

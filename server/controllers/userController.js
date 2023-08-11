@@ -46,7 +46,7 @@ userController.loginUser = async (req, res) => {
         }
         
         // Validate the password against the hashed password in the database
-        const validPassword = user.validPassword(req.body.password);
+        const validPassword = await user.validPassword(req.body.password);
         
         // If password is not valid, send error response
         if (!validPassword) {
@@ -75,7 +75,6 @@ userController.getUserId = (req, res) => {
     try {
       // Extract token from header
       const token = req.header('Authorization').replace('Bearer ', '');
-      console.log('Token: ' + token)
       // Verify and decode the token
       const decoded = jwt.verify(token, 'KotoAmatsukami@1');
       // Send the userId back to the client

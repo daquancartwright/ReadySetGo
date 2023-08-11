@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    let userId;
+    
     var addItemBtn = document.querySelector('.add-item-btn');
     var itemInput = document.querySelector('.item-input');
     var updateListBtn = document.querySelector('.update-list-btn')
@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Define currentActivity and currentItems
     var activityStates = {}
-    var currentActivity;
     var currentItems = [];
+    var currentActivity;
+    var currentActivityId;
 
     // Event Listeners
 
@@ -68,12 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // if (!currentActivity || currentItems.length === 0) return;
         if (!currentActivity) return;
 
+        // alert(currentActivityId)
         const userId = await fetchId();
-        const activityId = currentActivity.id;
+        const activityId = currentActivityId;
 
         // Define the URL for the update endpoint
-        const url = `http://localhost:5500/api/activity-lists/update/${userId}/34`;
-
+        const url = `http://localhost:5500/api/activity-lists/update/${userId}/${activityId}`;
     
         // Make a PUT request to the update endpoint
         try {
@@ -91,7 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle the response
             if (response.ok) {
                 const updatedList = await response.json();
-                console.log('List updated successfully:', updatedList);
+                alert(`${currentActivity} List updated successfully:`, updatedList)
+                // console.log('List updated successfully:', updatedList);
             } else {
                 const error = await response.json();
                 console.error('Error updating list:', error);
@@ -123,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Collect the List ID's
             lists.forEach(list => {
                 list.id = list.id // Save the ID in the list object
+                const activityId = list.id;
             })
             renderLists(lists);
         } catch (error) {
@@ -158,6 +161,22 @@ document.addEventListener('DOMContentLoaded', () => {
             listDiv.className = 'activity-card';
             listDiv.setAttribute('data-activity', list.activity);
 
+            // Create a delete button for each activity card
+            const deleteListBtn = document.createElement('span');
+            deleteListBtn.className = 'delete-list-button';
+            deleteListBtn.textContent = 'X';
+
+            // Add click listener to the delete button
+            deleteListBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteList(currentActivityId)
+                location.reload();
+            })
+
+            // Append the delete button to the activity-card
+            listDiv.appendChild(deleteListBtn)
+
+
             // Add the image for the activity
             const img = document.createElement('img');
             // Here you can map the activity to the correct image URL
@@ -175,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add click listener event to the activity card
             listDiv.addEventListener('click', () => {
+                // Assign the activityId here
+                currentActivityId = list.id
                 // Initialize the state for each activity
                 if (!activityStates[list.activity]) {
                     activityStates[list.activity] = list.items.map(item => ({ text: item, completed: false }));
@@ -196,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Updated renderActivityList function
     function renderActivityList(activity, items) {
         currentActivity = activity;
+        // currentActivityId = activity.id;
         // currentItems = items;
 
         // Check if the activity state already exists, otherwise initialize
@@ -304,8 +326,26 @@ document.addEventListener('DOMContentLoaded', () => {
             "Fishing": "https://www.nps.gov/subjects/fishing/images/Mississippi-recreational-area-fishing-canoe-NPS.jpg?maxwidth=650&autorotate=false",
 
             "Picnic": "https://consettmagazine.com/wp-content/uploads/2014/04/picnic1.jpg",
+
+            "Grocery shopping": "https://www.mashed.com/img/gallery/the-best-worst-days-to-grocery-shop/intro-1679673392.jpg",
             
             "Custom": "https://sunshineandravioli.net/cdn/shop/products/il_fullxfull.2304308055_rc63_2048x.jpg?v=1650203315",
+
+            "Wedding": "https://assets.vogue.com/photos/6457fe35c943a2672e3e6c65/4:3/pass/undefined", 
+
+            "Gardening": "https://media.cnn.com/api/v1/images/stellar/prod/230405132308-01-gardening-stock.jpg?c=16x9&q=h_720,w_1280,c_fill", 
+
+            "Movie night": "https://blog.zulily.com/wp-content/uploads/2021/04/AdobeStock_289927915-1280x640.jpeg", 
+
+            "Game night": "https://cms-tc.pbskids.org/parents/expert-tips-and-advice/bringing-back-family-game-night-hero.jpg", 
+
+            "Amusement park": "https://di-uploads-pod16.dealerinspire.com/toyotaofnorthcharlotte/uploads/2019/07/Charlotte-theme-parks.jpg", 
+
+            "Karaoke": "https://d39l2hkdp2esp1.cloudfront.net/img/photo/247928/247928_00_2x.jpg", 
+
+            "Wedding": "https://assets.vogue.com/photos/6457fe35c943a2672e3e6c65/4:3/pass/undefined", 
+
+            "School": "https://www.census.gov/programs-surveys/sis/_jcr_content/root/responsivegrid/responsivegrid_790112278/imagecore.coreimg.80.1280.png/1655294875001/sis-hero-image.png", 
         };
 
         return images[activity] || ''; // Return empty string if activity not found
@@ -313,7 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fetchId() {
         const token = localStorage.getItem('jwtToken')
-        console.log(`JWT Token: ${token}`)
         
         return fetch('/api/users/getUserId', {
             method: 'GET',
@@ -329,11 +368,29 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('An error occurred:', error))
     }
 
+    function deleteList(id) {
+        return fetch(`/api/activity-lists/delete/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete the list');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('An error occurred', error)
+        })
+        // .then(() => {
+        //     document.getElementById(id).remove();
+        // });
+    }
+
     // Initialize function
     async function initialize() {
         console.log('Initializing...'); // Debug log
         const userId = await fetchId();
-        console.log('User ID fetched:', userId); // Debug log
+        // console.log('User ID fetched:', userId); // Debug log
         fetchUserLists(userId);
     }
 

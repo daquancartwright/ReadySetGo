@@ -7,6 +7,7 @@ const sequelize = require('../db');  // Importing sequelize from db.js
 
 // We define our User model.
 class User extends Model {
+    
     // Encrypt password
     static async hashPassword(password) {
         return await bcrypt.hash(password, 10);

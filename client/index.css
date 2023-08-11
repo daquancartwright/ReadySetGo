@@ -1,0 +1,130 @@
+/* Global Styles */
+
+body {
+    background: url('https://informingfamilies.org/wp-content/uploads/2019/05/summer-car-travel.jpg') no-repeat center center fixed; /* Set background image */
+    background-size: cover; /* Cover the entire viewport */
+    color: #fff; /* Set the default text color to white */
+    font-family: Arial, sans-serif;
+}
+
+/* Navigation Bar Styles */
+
+nav {
+    background-color: rgba(3, 88, 85, 0.5); /* Semi-transparent teal background */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em;
+    font-size: 1.35em;
+    color: #ffffff;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 1.5em;
+    font-size: 1.2em;
+}
+
+/* Increase spacing between navigation links for better touch target size and visual separation */
+nav a:not(:last-child) {
+    margin-right: 1.6em;
+}
+
+/* Change the color when link is actively being clicked */
+nav a:active,
+#header-logo:active {
+    color: #004d4d; /* Even darker shade of teal for an active/click effect */
+}
+
+/* Main Content Styles */
+
+main {
+    padding: 1em;
+    background-color: #004d4d; /* Semi-transparent background for readability */
+    border-radius: 10px; /* Rounded corners */
+    max-width: 800px; /* Set max width */
+    margin: 2em auto; /* Center content horizontally */
+    text-align: center; /* Center text within main content */
+}
+
+main a {
+    display: inline-block; /* To apply padding and background color */
+    padding: 10px 20px; /* Space around the text */
+    background-color: #b2d8d8; /* Teal background */
+    color: #ffffff; /* White text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 15px; /* Rounded corners */
+    margin-top: 1em; /* Space above the link */
+}
+
+/* Footer Styles */
+
+footer {
+    background-color: rgba(2, 85, 72, 0.5); /* Semi-transparent teal background */
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #ffffff;
+}
+
+nav a:hover,
+#header-logo:hover {
+    color: #003333; /* Darker shade of teal */
+    cursor: pointer;
+}
+
+#header-logo {
+    text-align: center; /* Keeps the text centered */
+    color: white; /* Dark grey color for the text */
+    font-size: 2.5em; /* Increases the font size */
+    text-shadow: 3px 3px 10px rgba(2, 85, 85, 0.5); /* Adds a subtle shadow to the text */
+    font-family: 'Georgia', serif; /* You can change this to your preferred font-family */
+    font-weight: bold; /* Makes the text bold */
+}
+
+/* Styling for both login and register input fields */
+#login-form input,
+#register-form input {
+    width: 100%; /* Full width of the container */
+    padding: 18px; /* Increase padding to make the inputs bigger */
+    margin: 10px 0; /* Adds margin above and below the input */
+    box-sizing: border-box; /* Ensures that padding and border are included in the total width */
+    border: 2px solid #ccc; /* Creates a light grey border around the input */
+    border-radius: 6px; /* Rounds the corners of the border */
+}
+
+/* Styling for login and register buttons */
+#login-form button,
+#register-form button {
+    background-color: #004d4d; /* Sets the background color to a shade of green */
+    color: white; /* Sets the text color to white */
+    padding: 14px 20px; /* Adds padding around the text inside the button */
+    margin: 10px 0; /* Adds margin above and below the button */
+    border: none; /* Removes the default border */
+    cursor: pointer; /* Changes the cursor to a hand symbol when hovering over the button */
+    width: 100%; /* Full width of the container */
+}
+
+/* Changes the background color when hovering over the buttons */
+#login-form button:hover,
+#register-form button:hover {
+    background-color: #11b1b1a9;
+    
+}
+
+/* You may also want to style your labels to align with the increased size of the inputs */
+#login-form label,
+#register-form label {
+    font-size: 25px; /* Increases the font size of the labels */
+}
+
+h2 {
+    font-size: 35px;
+}
+
+
+

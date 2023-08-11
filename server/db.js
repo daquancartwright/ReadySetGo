@@ -14,16 +14,16 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
     logging: false
 });
 
-sequelize.authenticate()
-    .then(() => {
-        console.log('Database connection has been established successfully.');
+// sequelize.authenticate()
+//     .then(() => {
+//         console.log('Database connection has been established successfully.');
         
-        // Synchronizing all models
-        sequelize.sync();
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
+//         // Synchronizing all models
+//         sequelize.sync();
+//     })
+//     .catch(err => {
+//         console.error('Unable to connect to the database:', err);
+//     });
 
 
 // Exporting the Sequelize instance so it can be used elsewhere in the project.

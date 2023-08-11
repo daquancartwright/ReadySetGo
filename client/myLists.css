@@ -4,10 +4,24 @@ body {
     background-color: whitesmoke; /* white background */
   }
 
-h1 {
-    text-align: center;
-    color: #333;
+#my-activity-lists {
+    text-align: center; /* Keeps the text centered */
+    color: #004d4d; /* Dark grey color for the text */
+    font-size: 3.2em; /* Increases the font size */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow to the text */
+    /* background: linear-gradient(90deg, rgba(178,216,216,1) 0%, rgba(255,255,255,1) 100%); Background gradient */
+    padding: 5px; /* Adds space around the text */
+    border-radius: 10px; /* Rounds the corners */
+    display: inline-block; /* Aligns with the text content */
+    font-family: 'Georgia', serif; /* You can change this to your preferred font-family */
+    font-weight: bold; /* Makes the text bold */
+    margin-left: auto; /* Left margin set to auto */
+    margin-right: auto; /* Right margin set to auto */
+    display: block; /* Makes the element a block-level element */
+    width: fit-content; /* Fits the width to the content */
+
 }
+
 
 /* Activity grid container */
 .activity-grid {
@@ -41,7 +55,6 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* background-color: rgba(255, 255, 255, 0.7); */
     padding: 5px;
     border-radius: 5px;
     text-align: center;
@@ -51,6 +64,15 @@ h1 {
 .activity-label h3 {
     margin: 0;
     color: white;
+    font-size: 2em;
+}
+
+.activity-card:hover {
+    transform: scale(1.05)
+}
+
+.activity-card:hover .delete-list-button {
+    display: block;
 }
 
 /* Stylish list container */
@@ -73,6 +95,17 @@ h1 {
     cursor: pointer;
 }
 
+.delete-list-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    color: red;
+    cursor: pointer;
+}
+
+
+
 .delete-button {
     float: right;
     color: red;
@@ -89,19 +122,14 @@ h1 {
 
 .add-item-btn,
 .update-list-btn {
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
-    border: 1px solid #ccc;
+    margin-top: 15px;
+    padding: 10px 15px;
+    color: white;
     background-color: #b2d8d8;
-}
-
-.custom-dropdown {
-    width: 200px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    padding: 10px;
-}
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+  }
 
 .item-input {
     width: 100%;
@@ -114,16 +142,19 @@ h1 {
 nav {
     background-color: #b2d8d8; /* light teal */
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 1em;
+    padding: 1.5em;
+    font-size: 1.35em ;
     color: #ffffff;
   }
   
-nav a {
-color: #ffffff;
-text-decoration: none;
-margin-left: 0.5em;
-}
+  nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 1.5em;
+    font-size: 1.2em;
+  }
 
   /* Add a hover effect for links to show they're interactive */
 nav a:hover,
@@ -145,7 +176,10 @@ nav a:active,
 
 /* Style the h1 logo in the header for better visual indication and separation */
 #header-logo {
-    color: #ffffff;
-    text-decoration: none;
-    cursor: pointer; /* Shows hand icon indicating it's clickable */
+    text-align: center; /* Keeps the text centered */
+    color: white; /* Dark grey color for the text */
+    font-size: 2.5em; /* Increases the font size */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow to the text */
+    font-family: 'Georgia', serif; /* You can change this to your preferred font-family */
+    font-weight: bold; /* Makes the text bold */
 }

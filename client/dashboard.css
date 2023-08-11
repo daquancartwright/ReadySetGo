@@ -1,15 +1,9 @@
 /* styles.css */
 
-/* Basic CSS Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff; /* white background */
 }
 
 /* Navigation Bar Styles */
@@ -17,34 +11,18 @@ nav {
   background-color: #b2d8d8; /* light teal */
   display: flex;
   justify-content: space-between;
-  padding: 1em;
+  align-items: center;
+  padding: 1.5em;
+  font-size: 1.35em ;
   color: #ffffff;
 }
 
 nav a {
   color: #ffffff;
   text-decoration: none;
-  margin-left: 0.5em;
+  margin-left: 1.5em;
+  font-size: 1.2em;
 }
-
-/* Main Content Styles */
-main {
-  padding: 1em;
-}
-
-/* Footer Styles */
-footer {
-  background-color: #b2d8d8; /* light teal */
-  text-align: center;
-  padding: 1em;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: #ffffff;
-}
-
-/* Enhanced Styles */
 
 /* Add a hover effect for links to show they're interactive */
 nav a:hover,
@@ -64,11 +42,13 @@ nav a:active,
     color: #004d4d; /* Even darker shade of teal for an active/click effect */
 }
 
-/* Style the h1 logo in the header for better visual indication and separation */
 #header-logo {
-    color: #ffffff;
-    text-decoration: none;
-    cursor: pointer; /* Shows hand icon indicating it's clickable */
+  text-align: center; /* Keeps the text centered */
+  color: white; /* Dark grey color for the text */
+  font-size: 2.5em; /* Increases the font size */
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow to the text */
+  font-family: 'Georgia', serif; /* You can change this to your preferred font-family */
+  font-weight: bold; /* Makes the text bold */
 }
 
 /* Dashboard Styling */
@@ -78,25 +58,22 @@ body {
   background-color: white;
 }
 
-header {
-  text-align: center;
-  background-color: #b2d8d8;
-  padding: 20px;
-}
-
 .activity-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);  /* This allows 6 items in a row */
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .activity-card {
-  width: 150px;   /* Adjust as needed */
-  height: 150px;  /* Adjust as needed */
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   position: relative;
   cursor: pointer;
-  transition: 0.3s;
-  border-radius: 5px; /* Optional, for rounded corners */
+  overflow: hidden;
 }
 
 .activity-card:hover {
@@ -113,6 +90,7 @@ header {
   border-radius: 5px;
   text-align: center;
   color: white;
+  font-size: 2em;
 }
 
 .activity-card img {
@@ -126,10 +104,30 @@ header {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: lightblue;
+  background-color: #b2d8d8;
   border: none;
   color: white;
   cursor: pointer;
+  border-radius: 15px;
+}
+
+.customize-btn:hover {
+  background-color: #003333; 
+  color: #ffffff; 
+  transform: scale(1.07);
+}
+
+.add-custom-item-btn:hover,
+.save-list-btn:hover {
+  background-color: #003333; 
+  color: #ffffff; 
+  transform: scale(1.07);
+}
+
+.dropdown-btn:hover {
+  background-color: #003333; 
+  color: #ffffff; 
+  transform: scale(1.07);
 }
 
 .customization-section {
@@ -140,16 +138,20 @@ header {
 }
 
 .item-dropdown, .custom-item-input {
+  margin-top: 10px;
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .add-custom-item-btn, .save-list-btn {
+  margin-top: 15px;
   padding: 10px 15px;
-  background-color: lightblue;
+  color: white;
+  background-color: #b2d8d8;
   border: none;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 .item-list {
@@ -180,10 +182,15 @@ header {
 }
 
 .dropdown-btn {
-  background-color: lightblue;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: #ffffff;
+  background-color: #b2d8d8;
   padding: 10px;
   border: none;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 .custom-dropdown label {
@@ -196,12 +203,20 @@ header {
   margin-right: 10px;
 }
 
+.list-title-display {
+  font-size: 30;
+}
+
 .stylish-list {
   border: 2px solid lightblue;
   border-radius: 10px;
   padding: 25px;
   margin-top: 20px;
   max-width: 300px;
+}
+
+.stylish-list-title {
+  margin-bottom: 15px;
 }
 
 .list-title-input {
@@ -223,12 +238,30 @@ header {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: lightblue;
+  background-color: #b2d8d8;
   color: white;
   text-align: center;
   line-height: 20px;
   cursor: pointer;
   vertical-align: middle;
+}
+
+#create-list {
+  text-align: center; /* Keeps the text centered */
+  color: #004d4d; /* Dark grey color for the text */
+  font-size: 3.65em; /* Increases the font size */
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow to the text */
+  /* background: linear-gradient(90deg, rgba(178,216,216,1) 0%, rgba(255,255,255,1) 100%); Background gradient */
+  padding: 20px; /* Adds space around the text */
+  border-radius: 10px; /* Rounds the corners */
+  display: inline-block; /* Aligns with the text content */
+  font-family: 'Georgia', serif; /* You can change this to your preferred font-family */
+  font-weight: bold; /* Makes the text bold */
+  margin-left: auto; /* Left margin set to auto */
+  margin-right: auto; /* Right margin set to auto */
+  display: block; /* Makes the element a block-level element */
+  width: fit-content; /* Fits the width to the content */
+
 }
 
 

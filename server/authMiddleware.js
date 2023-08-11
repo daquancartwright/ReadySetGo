@@ -45,28 +45,3 @@ const authenticateJWT = (req, res, next) => {
 module.exports = {
     authenticateJWT
 };
-
-
-//////////////////////////////////////////////////////
-// const jwt = require('jsonwebtoken');
-
-// const authenticateJWT = (req, res, next) => {
-//     const token = req.header('Authorization'); // Get the token from the headers
-
-//     if (!token) {
-//         return res.status(403).json({ message: 'No token provided.' });
-//     }
-
-//     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Failed to authenticate token.' });
-//         }
-
-//         // Attach the user ID to the request object
-//         req.userId = decoded.id; // Assuming the decoded JWT contains the user ID as 'id'
-
-//         next(); // Proceed to the next middleware
-//     });
-// };
-
-// module.exports = { authenticateJWT };
