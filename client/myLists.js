@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     var addItemBtn = document.querySelector('.add-item-btn');
     var itemInput = document.querySelector('.item-input');
-    var updateListBtn = document.querySelector('.update-list-btn')
-    var logoutButton = document.querySelector('#logout')
+    var updateListBtn = document.querySelector('.update-list-btn');
+    var logoutButton = document.querySelector('#logout');
     const headerLogo = document.querySelector('#header-logo');
 
     // Define currentActivity and currentItems

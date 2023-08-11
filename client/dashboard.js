@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         karaoke: ['Karaoke machine', 'Microphones', 'Song List', 'Lyric Sheet', 'Stage'],
         wedding: ['Venue', 'Invitations', 'Catering', 'Florist', 'Music', 'Cake'],
         school: ['Pencils', 'Backpack', 'Glue', 'Retractor', 'Books', 'Notebooks', 'Highlighter', 'Calculator'],
+        gardening: ['Seeds', 'Soil', 'Pots', 'Fertilizer', 'Shovel', 'Water hose', 'Irrigation'],
 
     };
 
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         karaoke: [],
         wedding: [],
         school: [],
+        gardening: [],
     };
 
     let currentActivity = '';
